@@ -1,26 +1,87 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"&gt;>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"&gt;>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn-warning {
+            font-weight: bold;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .card img {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            object-fit: cover;
+            height: 180px;
+            width: 100%;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .card-text {
+            font-size: 14px;
+            color: #555;
+        }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            border-radius: 6px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            border-radius: 6px;
+        }
+        .mb-4 {
+            margin-bottom: 20px !important;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-4">
     <h2>User Dashboard</h2>
-    <a href="/user/cart" class="btn btn-warning float-end mb-3">🛒 View Cart</a><br/>
+    <div class="d-flex justify-content-end">
+        <a href="/user/cart" class="btn btn-warning mb-3">🛒 View Cart</a>
+    </div>
     <div class="row">
         <div class="col-md-4 mb-4" th:each="product : ${products}">
             <div class="card">
-                <img th:src="@{'/images/' + ${product.imageName}}" class="card-img-top" width="100" height="80" >
+                <img th:src="@{'/images/' + ${product.imageName}}" class="card-img-top">
 
                 <div class="card-body">
                     <h5 class="card-title" th:text="${product.name}"></h5>
                     <p class="card-text" th:text="${product.description}"></p>
-                    <p><strong>₹</strong> <span th:text="${product.price}"></span></p>
-                    <!--<a th:href="@{'/user/add-to-cart/' + ${product.id}}" class="btn btn-success w-100">Add to Cart</a> -->
-
-
+                    <p class="price">₹ <span th:text="${product.price}"></span></p>
 
                     <!-- Load reserved quantity from session map -->
                     <th:block th:with="reservedMap=${session.reservedStock},
@@ -34,12 +95,12 @@ availableStock=${product.stock - reservedQty}">
                         <!--If available stock > 0 -->
                         <a th:if="${availableStock > 0}"
                            th:href="@{'/user/add-to-cart/' + ${product.id}}"
-                           class="btn btn-primary btn-sm">
+                           class="btn btn-primary btn-sm w-100">
                             Add to Cart
                         </a>
 
                         <!-- If out of stock -->
-                        <button th:if="${availableStock <= 0}" class="btn btn-secondary btn-sm" disabled>
+                        <button th:if="${availableStock <= 0}" class="btn btn-secondary btn-sm w-100" disabled>
                             Out of Stock
                         </button>
                     </th:block>
