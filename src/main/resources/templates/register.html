@@ -3,27 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <title>Register | E-commerce</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"&gt;>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        /* ---------- BODY ---------- */
+        body {
+          background: linear-gradient(135deg, #f9f4ee, #ecdccd, #d6bfa5);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          position: relative;
+        }
+
+        /* ---------- BACKGROUND DETAILS ---------- */
+        body::before {
+          content: "";
+          position: absolute;
+          top: -80px;
+          left: -80px;
+          width: 350px;
+          height: 350px;
+          background: rgba(210, 161, 121, 0.25);
+          border-radius: 50%;
+          filter: blur(90px);
+        }
+        body::after {
+          content: "";
+          position: absolute;
+          bottom: -100px;
+          right: -100px;
+          width: 400px;
+          height: 400px;
+          background: rgba(181, 140, 97, 0.3);
+          border-radius: 50%;
+          filter: blur(100px);
+        }
+
+        /* ---------- REGISTER CARD ---------- */
+        .register-card {
+          background: rgba(255, 255, 255, 0.92);
+          backdrop-filter: blur(12px);
+          padding: 45px 35px;
+          border-radius: 18px;
+          box-shadow: 0 12px 28px rgba(92, 63, 41, 0.2);
+          width: 100%;
+          max-width: 420px;
+          z-index: 1;
+          animation: fadeInUp 0.8s ease-out;
+        }
+
+        .register-card h2 {
+          text-align: center;
+          color: #6d4c33;
+          font-weight: 600;
+          margin-bottom: 25px;
+          letter-spacing: 0.6px;
+        }
+
+        /* ---------- FORM STYLES ---------- */
+        .form-group label {
+          color: #5a4637;
+          font-weight: 500;
+        }
+
+        .form-control {
+          border-radius: 8px;
+          height: 45px;
+          border: 1.5px solid #d1b8a2;
+          transition: all 0.3s ease;
+          background-color: #fdfaf7;
+        }
+
+        .form-control:focus {
+          border-color: #b38867;
+          box-shadow: 0 0 8px rgba(179, 136, 103, 0.4);
+        }
+
+        /* ---------- BUTTON ---------- */
+        .btn-success {
+          background-color: #a47551;
+          border: none;
+          border-radius: 8px;
+          font-weight: bold;
+          transition: 0.3s;
+          height: 45px;
+          width: 100%;
+          color: #fff;
+        }
+
+        .btn-success:hover {
+          background-color: #8b5e3c;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 14px rgba(139, 94, 60, 0.4);
+        }
+
+        /* ---------- LINKS ---------- */
+        .text-center {
+          margin-top: 15px;
+        }
+
+        .text-center a {
+          color: #a47551;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .text-center a:hover {
+          color: #8b5e3c;
+          text-decoration: underline;
+        }
+
+        /* ---------- ANIMATION ---------- */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <h2 class="text-center">Register</h2>
-    <form method="post" action="/doRegister" class="col-md-6 offset-md-3">
+
+<body>
+<div class="register-card">
+    <h2>Create Your Account ☕✨</h2>
+    <form method="post" action="/doRegister">
         <div class="form-group mb-3">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
         </div>
         <div class="form-group mb-3">
             <label>Email</label>
-            <input type="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
         </div>
         <div class="form-group mb-3">
             <label>Password</label>
-            <input type="password" name="password" class="form-control" required>
+            <input type="password" name="password" class="form-control" placeholder="Create a password" required>
         </div>
-        <button class="btn btn-success w-100">Register</button>
+        <button class="btn btn-success">Register</button>
     </form>
-    <p class="text-center mt-3">Already have an account? <a href="/login">Login</a></p>
+    <p class="text-center mt-3">
+        Already have an account? <a href="/login">Login</a>
+    </p>
 </div>
 </body>
 </html>
